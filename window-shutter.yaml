@@ -1,5 +1,6 @@
 substitutions:
-  device_name: "Window Shutter"
+  device_name: "window-shutter"
+  device_verbose_name: "Window Shutter"
   pin_led1: GPIO0
   pin_button1: GPIO2
   pin_relay1: GPIO4
@@ -14,7 +15,7 @@ substitutions:
   close_duration: 20s
 
 esphome:
-  name: studio-window-shutter
+  name: "${device_name}"
   platform: ESP8266
   board: modwifi
 
@@ -36,7 +37,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Studio-Window"
+    ssid: "${device_name}"
     password: !secret fallback_hotspot_password
 
 captive_portal:
@@ -54,7 +55,7 @@ web_server:
 text_sensor:
   - platform: wifi_info
     ip_address:
-      name: ${device_name} IP
+      name: ${device_verbose_name} IP
 
 i2c:
   sda: GPIO12
@@ -64,37 +65,37 @@ i2c:
 sensor:
   # Uptime sensor.
   - platform: uptime
-    name: ${device_name} Uptime
+    name: ${device_verbose_name} Uptime
 
   # WiFi Signal sensor.
   - platform: wifi_signal
-    name: ${device_name} WiFi Signal
+    name: ${device_verbose_name} WiFi Signal
     update_interval: 60s
     
   - platform: ade7953
     irq_pin: ${pin_ade7953} # Prevent overheating by setting this
     voltage:
-      name: ${device_name} Voltage
+      name: ${device_verbose_name} Voltage
       filters:
         - throttle: 5s
     # On the Shelly 2.5 channels are mixed ch1=B ch2=A
     current_a:
-      name: ${device_name} Close Current
+      name: ${device_verbose_name} Close Current
       id: close_current
       internal: true
     current_b:
-      name: ${device_name} Open Current
+      name: ${device_verbose_name} Open Current
       id: open_current
       internal: true
     active_power_a:
-      name: ${device_name} Active Power Close
+      name: ${device_verbose_name} Active Power Close
       id: close_power
       internal: true
       filters:
         - lambda: if (x < 2) return 0; else return x;
       # active_power_a is normal, so don't multiply by -1
     active_power_b:
-      name: ${device_name} Active Power Open
+      name: ${device_verbose_name} Active Power Open
       id: open_power
       internal: true
       # active_power_b is inverted, so multiply by -1
@@ -105,7 +106,7 @@ sensor:
 
   - platform: ntc
     sensor: temp_resistance_reading
-    name: ${device_name} Temperature
+    name: ${device_verbose_name} Temperature
     unit_of_measurement: "°C"
     accuracy_decimals: 1
     icon: "mdi:thermometer"
@@ -130,14 +131,14 @@ sensor:
     internal: true
   
   - platform: template
-    name: ${device_name} Active Power
+    name: ${device_verbose_name} Active Power
     id: total_active_power
     unit_of_measurement: W
     lambda: return (id(open_power).state + id(close_power).state);
     update_interval: 1s
   
   - platform: total_daily_energy
-    name: ${device_name} Daily Energy
+    name: ${device_verbose_name} Daily Energy
     power_id: total_active_power
     filters:
       # Multiplication factor from W to kW is 0.001
@@ -188,7 +189,7 @@ switch:
   - platform: shutdown
     id: _shutdown
     internal: true
-    name: ${device_name} Shelly 2.5 Shutdown
+    name: ${device_verbose_name} Shelly 2.5 Shutdown
   - platform: gpio
     pin: ${pin_relay1}
     name: "Relay #1"
@@ -207,7 +208,7 @@ switch:
 
 cover:
   - platform: current_based
-    name: "${device_name} Blind"
+    name: "${device_verbose_name} Blind"
     id: blind
 
     open_sensor: open_current
