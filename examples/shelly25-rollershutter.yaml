@@ -1,0 +1,17 @@
+substitutions:
+  device_name: shelly25-rollershutter
+  device_verbose_name: "Shelly 2.5 Rollershutter"
+  open_duration: 29s
+  close_duration: 28s
+  ota_password: !secret ota_password
+  fallback_hotspot_password: !secret fallback_hotspot_password
+  wifi1_ssid: !secret wifi_ssid_not
+  wifi1_password: !secret wifi_key_not
+  
+
+packages:
+  remote_package:
+    url: https://github.com/gervaso/esphome-devices
+    ref: main
+    file: window-shutter.yaml
+    #refresh: 60s
