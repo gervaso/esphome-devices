@@ -156,6 +156,9 @@ binary_sensor:
     name: "Switch #1"
     internal: true
     id: switch1
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
     on_click:
       lambda: |-
         auto call = id(blind).make_call();
@@ -173,6 +176,9 @@ binary_sensor:
     name: "Switch #2"
     internal: true
     id: switch2
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
     on_click:
       lambda: |-
         auto call = id(blind).make_call();
