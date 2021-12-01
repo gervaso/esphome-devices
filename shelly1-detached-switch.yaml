@@ -1,5 +1,6 @@
 substitutions:
-  device_name: "Switch Light Detached"
+  device_name: "switch-light"
+  device_verbose_name: "Switch Light Detached"
 
 esphome:
   name: shelly1-detached
@@ -36,24 +37,24 @@ web_server:
 text_sensor:
   - platform: wifi_info
     ip_address:
-      name: ${device_name} IP
+      name: ${device_verbose_name} IP
 
 # Sensors with general information.
 sensor:
   # Uptime sensor.
   - platform: uptime
-    name: ${device_name} Uptime
+    name: ${device_verbose_name} Uptime
 
   # WiFi Signal sensor.
   - platform: wifi_signal
-    name: ${device_name} WiFi Signal
+    name: ${device_verbose_name} WiFi Signal
     update_interval: 60s
 
 # Shelly 1 detached switch config with fallback in case of wifi or api fail
 
 switch:
   - platform: gpio
-    name: ${device_name}
+    name: ${device_verbose_name}
     pin: GPIO4
     id: shelly_relay
     # after reboot, keep the relay off. this prevents light turning on after a power outage
@@ -61,7 +62,7 @@ switch:
 
 binary_sensor:
   - platform: gpio
-    name: ${device_name} Input
+    name: ${device_verbose_name} Input
     internal: true
     pin:
       number: GPIO5
