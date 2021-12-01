@@ -28,17 +28,17 @@ api:
 ota:
   safe_mode: true
   id: my_ota
-  password: !secret ota_password
+  #password: !secret ota_password
 
 wifi:
-  ssid: !secret wifi_ssid_not
-  password: !secret wifi_key_not
+  #ssid: !secret wifi_ssid_not
+  #password: !secret wifi_key_not
   power_save_mode: none
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${device_name}"
-    password: !secret fallback_hotspot_password
+    #password: !secret fallback_hotspot_password
 
 captive_portal:
 
