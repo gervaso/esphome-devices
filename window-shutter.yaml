@@ -13,6 +13,11 @@ substitutions:
   pin_temp: A0
   open_duration: 20s
   close_duration: 20s
+  ota_password:
+  fallback_ap_password:
+  wifi1_ssid:
+  wifi1_password:
+  
 
 esphome:
   name: "${device_name}"
@@ -28,17 +33,17 @@ api:
 ota:
   safe_mode: true
   id: my_ota
-  #password: !secret ota_password
+  password: "${ota_password}"
 
 wifi:
-  #ssid: !secret wifi_ssid_not
-  #password: !secret wifi_key_not
+  ssid: ${wifi1_ssid}
+  password: ${wifi1_password}
   power_save_mode: none
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${device_name}"
-    #password: !secret fallback_hotspot_password
+    password: ${fallback_hotspot_password}
 
 captive_portal:
 
