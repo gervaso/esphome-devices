@@ -14,7 +14,7 @@ substitutions:
   open_duration: 20s
   close_duration: 20s
   ota_password:
-  fallback_ap_password:
+  fallback_hotspot_password:
   wifi1_ssid:
   wifi1_password:
   
