@@ -140,6 +140,8 @@ sensor:
     id: total_active_power
     unit_of_measurement: W
     lambda: return (id(open_power).state + id(close_power).state);
+    filters:
+      multiply: 0.1
     update_interval: 1s
   
   - platform: total_daily_energy
