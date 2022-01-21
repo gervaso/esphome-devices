@@ -159,10 +159,10 @@ status_led:
 
 binary_sensor:
   - platform: gpio
-    pin: ${pin_switch1n}
-    name: "Switch #1"
+    pin: ${pin_switch2n}
+    name: "Switch #2"
     internal: true
-    id: switch1
+    id: switch2
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
@@ -179,10 +179,10 @@ binary_sensor:
         call.perform();
 
   - platform: gpio
-    pin: ${pin_switch2n}
-    name: "Switch #2"
+    pin: ${pin_switch1n}
+    name: "Switch #1"
     internal: true
-    id: switch2
+    id: switch1
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
