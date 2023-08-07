@@ -70,20 +70,20 @@ i2c:
 # Sensors with general information.
 sensor:
   # Uptime sensor.
-  - platform: uptime
-    name: ${device_verbose_name} Uptime
+  #- platform: uptime
+  #  name: ${device_verbose_name} Uptime
 
   # WiFi Signal sensor.
-  - platform: wifi_signal
-    name: ${device_verbose_name} WiFi Signal
-    update_interval: 60s
+  #- platform: wifi_signal
+  #  name: ${device_verbose_name} WiFi Signal
+  #  update_interval: 60s
     
   - platform: ade7953
     irq_pin: ${pin_ade7953} # Prevent overheating by setting this
-    voltage:
-      name: ${device_verbose_name} Voltage
-      filters:
-        - throttle: 5s
+    #voltage:
+    #  name: ${device_verbose_name} Voltage
+    #  filters:
+    #    - throttle: 5s
     # On the Shelly 2.5 channels are mixed ch1=B ch2=A
     current_a:
       name: ${device_verbose_name} Close Current
