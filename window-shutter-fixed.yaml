@@ -11,8 +11,8 @@ substitutions:
   pin_relay2: GPIO15
   pin_ade7953: GPIO16
   pin_temp: A0
-  open_duration: 20s
-  close_duration: 20s
+  open_duration: 28s
+  close_duration: 30s
   ota_password:
   fallback_hotspot_password:
   wifi1_ssid:
