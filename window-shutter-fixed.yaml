@@ -1,6 +1,7 @@
 substitutions:
   device_name: "window-shutter"
   device_verbose_name: "Window Shutter"
+  device_class: "shutter"
   pin_led1: GPIO0
   pin_button1: GPIO2
   pin_relay1: GPIO4
@@ -222,6 +223,7 @@ switch:
 
 cover:
   - platform: current_based
+    device_class: ${device_class}
     name: "${device_verbose_name} Blind"
     id: blind
 
