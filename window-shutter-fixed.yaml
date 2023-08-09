@@ -170,12 +170,12 @@ binary_sensor:
       - delayed_off: 10ms
     on_press:
       lambda: |-
-        auto call = id(blind).make_call();
-        if (id(blind).current_operation == CoverOperation::COVER_OPERATION_IDLE) {
+        auto call = id(shutter).make_call();
+        if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_IDLE) {
           call.set_command_close();
-        } else if (id(blind).current_operation == CoverOperation::COVER_OPERATION_OPENING) {
+        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_OPENING) {
           call.set_command_stop();
-        } else if (id(blind).current_operation == CoverOperation::COVER_OPERATION_CLOSING) {
+        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_CLOSING) {
           call.set_command_stop();
         }
         call.perform();
@@ -190,12 +190,12 @@ binary_sensor:
       - delayed_off: 10ms
     on_press:
       lambda: |-
-        auto call = id(blind).make_call();
-        if (id(blind).current_operation == CoverOperation::COVER_OPERATION_IDLE) {
+        auto call = id(shutter).make_call();
+        if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_IDLE) {
           call.set_command_open();
-        } else if (id(blind).current_operation == CoverOperation::COVER_OPERATION_OPENING) {
+        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_OPENING) {
           call.set_command_stop();
-        } else if (id(blind).current_operation == CoverOperation::COVER_OPERATION_CLOSING) {
+        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_CLOSING) {
           call.set_command_stop();
         }
         call.perform();
@@ -224,8 +224,8 @@ switch:
 cover:
   - platform: current_based
     device_class: ${device_class}
-    name: "${device_verbose_name} Blind"
-    id: blind
+    name: "${device_verbose_name} Shutters"
+    id: shutter
 
     open_sensor: open_current
     open_moving_current_threshold: 0.5
