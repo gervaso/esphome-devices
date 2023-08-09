@@ -224,7 +224,7 @@ switch:
 cover:
   - platform: current_based
     device_class: ${device_class}
-    name: "${device_verbose_name} Shutters"
+    name: "${device_verbose_name} Shutter"
     id: shutter
 
     open_sensor: open_current
