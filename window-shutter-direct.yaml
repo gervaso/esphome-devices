@@ -31,6 +31,56 @@ logger:
 
 # Enable Home Assistant API
 api:
+  services:
+    - service: calibrate_lower_endstop
+      then:
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+    - service: calibrate_upper_endstop
+      then:
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+    - service: reset_endstops
+      then:
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
 
 ota:
   safe_mode: true
@@ -174,17 +224,6 @@ binary_sensor:
     on_release:
       then:
         - switch.turn_off: relay2
-    # this sets the motor's endstops
-    on_double_click:
-      then:
-        - delay: 1s
-        - switch.turn_on: relay2
-        - delay: 1s
-        - switch.turn_off: relay2
-        - delay: 1s
-        - switch.turn_on: relay2
-        - delay: 1s
-        - switch.turn_off: relay2
 
   - platform: gpio
     pin: ${pin_switch1n}
@@ -200,48 +239,7 @@ binary_sensor:
     on_release:
       then:
         - switch.turn_off: relay1
-    # this sets the motor's endstops
-    on_double_click:
-      then:
-        - delay: 1s
-        - switch.turn_on: relay1
-        - delay: 1s
-        - switch.turn_off: relay1
-        - delay: 1s
-        - switch.turn_on: relay1
-        - delay: 1s
-        - switch.turn_off: relay1
-    # this resets the motor's endstops
-    # on_double_click:
-    #   then:
-    #     - switch.turn_on: relay1
-    #     - delay: 1s
-    #     - switch.turn_off: relay1
-    #     - delay: 1s
-    #     - switch.turn_on: relay2
-    #     - delay: 1s
-    #     - switch.turn_off: relay2
-    #     - delay: 1s
-    #     - switch.turn_on: relay2
-    #     - delay: 1s
-    #     - switch.turn_off: relay2
-    #     - delay: 1s
-    #     - switch.turn_on: relay1
-    #     - delay: 1s
-    #     - switch.turn_off: relay1
-    #     - delay: 1s
-    #     - switch.turn_on: relay2
-    #     - delay: 1s
-    #     - switch.turn_off: relay2
-    #     - delay: 1s
-    #     - switch.turn_on: relay1
-    #     - delay: 1s
-    #     - switch.turn_off: relay1
-    #     - delay: 1s
-    #     - switch.turn_on: relay1
-    #     - delay: 1s
-    #     - switch.turn_off: relay1
-        
+
 
 switch:
   - platform: shutdown
