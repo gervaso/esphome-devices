@@ -189,6 +189,37 @@ binary_sensor:
     on_release:
       then:
         - switch.turn_off: relay1
+    # this resets the motor's endstops
+    on_double_click:
+      then:
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay2
+        - delay: 1s
+        - switch.turn_off: relay2
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        - delay: 1s
+        - switch.turn_on: relay1
+        - delay: 1s
+        - switch.turn_off: relay1
+        
 
 switch:
   - platform: shutdown
