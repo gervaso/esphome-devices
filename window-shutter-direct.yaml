@@ -169,16 +169,11 @@ binary_sensor:
       - delayed_on: 10ms
       - delayed_off: 10ms
     on_press:
-      lambda: |-
-        auto call = id(shutter).make_call();
-        if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_IDLE) {
-          call.set_command_close();
-        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_OPENING) {
-          call.set_command_stop();
-        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_CLOSING) {
-          call.set_command_stop();
-        }
-        call.perform();
+      then:
+        - switch.turn_on: relay_2
+    on_release:
+      then:
+        - switch.turn_off: relay_2
 
   - platform: gpio
     pin: ${pin_switch1n}
@@ -189,16 +184,11 @@ binary_sensor:
       - delayed_on: 10ms
       - delayed_off: 10ms
     on_press:
-      lambda: |-
-        auto call = id(shutter).make_call();
-        if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_IDLE) {
-          call.set_command_open();
-        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_OPENING) {
-          call.set_command_stop();
-        } else if (id(shutter).current_operation == CoverOperation::COVER_OPERATION_CLOSING) {
-          call.set_command_stop();
-        }
-        call.perform();
+      then:
+        - switch.turn_on: relay_1
+    on_release:
+      then:
+        - switch.turn_off: relay_1
 
 switch:
   - platform: shutdown
@@ -211,7 +201,7 @@ switch:
     internal: true
     id: relay1
     interlock: &interlock_group [relay1, relay2]
-    interlock_wait_time: 200ms
+    interlock_wait_time: 500ms
 
   - platform: gpio
     pin: ${pin_relay2}
@@ -219,7 +209,7 @@ switch:
     internal: true
     id: relay2
     interlock: *interlock_group
-    interlock_wait_time: 200ms
+    interlock_wait_time: 500ms
 
 cover:
   - platform: current_based
