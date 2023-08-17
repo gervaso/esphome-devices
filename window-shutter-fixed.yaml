@@ -211,7 +211,7 @@ switch:
     internal: true
     id: relay1
     interlock: &interlock_group [relay1, relay2]
-    interlock_wait_time: 200ms
+    interlock_wait_time: 500ms
 
   - platform: gpio
     pin: ${pin_relay2}
@@ -219,7 +219,7 @@ switch:
     internal: true
     id: relay2
     interlock: *interlock_group
-    interlock_wait_time: 200ms
+    interlock_wait_time: 500ms
 
 cover:
   - platform: current_based
