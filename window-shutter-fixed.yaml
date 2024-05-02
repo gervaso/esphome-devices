@@ -23,7 +23,7 @@ substitutions:
 esphome:
   name: "${device_name}"
   platform: ESP8266
-  board: modwifi
+  board: esp01_1m
 
 # Enable logging
 logger:
