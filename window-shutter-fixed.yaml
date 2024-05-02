@@ -10,7 +10,7 @@ substitutions:
   pin_switch1n: GPIO13
   pin_scl: GPIO14
   pin_relay2: GPIO15
-  pin_ade7953: GPIO16
+  pin_ade7953_i2c: GPIO16
   pin_temp: A0
   open_duration: 30s
   close_duration: 30s
@@ -79,8 +79,8 @@ sensor:
   #  name: ${device_verbose_name} WiFi Signal
   #  update_interval: 60s
     
-  - platform: ade7953
-    irq_pin: ${pin_ade7953} # Prevent overheating by setting this
+  - platform: ade7953_i2c
+    irq_pin: ${pin_ade7953_i2c} # Prevent overheating by setting this
     #voltage:
     #  name: ${device_verbose_name} Voltage
     #  filters:
