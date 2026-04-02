@@ -1,0 +1,164 @@
+sn74hc595:
+  - id: sn74hc595_hub
+    data_pin: GPIO13
+    clock_pin: GPIO27
+    latch_pin: GPIO14
+    oe_pin: GPIO4
+    sr_count: 3
+
+switch:
+  - platform: modbus_controller
+    modbus_controller_id: modbus_device
+    name: "Master Valve"
+    id: sprinkler_master_valve
+    register_type: coil
+    address: 0
+
+  - platform: gpio
+    id: sprinkler_valve_sw0
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 16
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw1
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 17
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw2
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 18
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw3
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 19
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw4
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 20
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw5
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 21
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw6
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 22
+      inverted: false
+
+  - platform: gpio
+    id: sprinkler_valve_sw7
+    restore_mode: ALWAYS_OFF
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 23
+      inverted: false
+
+output:
+  - platform: gpio
+    id: segment_a
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 0
+      inverted: false
+
+  - platform: gpio
+    id: segment_b
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 1
+      inverted: false
+
+  - platform: gpio
+    id: segment_c
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 2
+      inverted: false
+
+  - platform: gpio
+    id: segment_d
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 3
+      inverted: false
+
+  - platform: gpio
+    id: segment_e
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 4
+      inverted: false
+
+  - platform: gpio
+    id: segment_f
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 5
+      inverted: false
+
+  - platform: gpio
+    id: segment_g
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 6
+      inverted: false
+
+  - platform: gpio
+    id: dp
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 7
+      inverted: false
+
+  - platform: gpio
+    id: digit1
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 8
+      inverted: true
+
+  - platform: gpio
+    id: digit2
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 9
+      inverted: true
+
+  - platform: gpio
+    id: digit3
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 10
+      inverted: true
+
+  - platform: gpio
+    id: digit4
+    pin:
+      sn74hc595: sn74hc595_hub
+      number: 11
+      inverted: true

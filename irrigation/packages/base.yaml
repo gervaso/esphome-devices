@@ -1,0 +1,92 @@
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  baud_rate: 0
+
+captive_portal:
+
+globals:
+  - id: text_var
+    type: std::string
+    initial_value: '"IDLE"'
+    restore_value: no
+
+  - id: display_state
+    type: int
+    restore_value: no
+    initial_value: '0'
+
+  - id: system_status
+    type: int
+    restore_value: no
+    initial_value: '0'
+
+light:
+  - platform: status_led
+    id: board_led
+    name: "Board LED"
+    pin: GPIO15
+    internal: true
+
+uart:
+  id: mod_bus
+  tx_pin: GPIO1
+  rx_pin: GPIO3
+  baud_rate: 9600
+  stop_bits: 1
+
+modbus:
+  id: modbus1
+  flow_control_pin: GPIO22
+
+modbus_controller:
+  - id: modbus_device
+    address: 1
+    modbus_id: modbus1
+    setup_priority: -10
+
+interval:
+  - interval: 5s
+    then:
+      - lambda: |-
+          switch (id(display_state)) {
+            case 0: {
+              if (id(controller).active_valve().has_value()) {
+                auto running_valve = id(controller).active_valve().value();
+                char buffer[5];
+                snprintf(buffer, sizeof(buffer), "run%u", running_valve + 1);
+                id(text_var) = buffer;
+              } else {
+                id(text_var) = "IDLE";
+              }
+              break;
+            }
+
+            case 1: {
+              if (id(controller).time_remaining_active_valve().has_value()) {
+                int seconds = id(controller).time_remaining_active_valve().value();
+                int minutes = seconds / 60;
+                int secs = seconds % 60;
+                char buffer[5];
+                snprintf(buffer, sizeof(buffer), "%02u%02u", minutes, secs);
+                id(text_var) = buffer;
+              } else {
+                id(text_var) = "IDLE";
+              }
+              break;
+            }
+
+            case 2: {
+              id(text_var) = id(irrigation_rain_sensor) ? "DRY " : "WET ";
+              break;
+            }
+          }
+
+          id(display_state) = (id(display_state) + 1) % 3;

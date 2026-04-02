@@ -1,0 +1,120 @@
+sn74hc165:
+  - id: sn74hc165_hub
+    clock_pin: GPIO17
+    data_pin: GPIO5
+    load_pin: GPIO16
+    sr_count: 1
+
+binary_sensor:
+  - platform: gpio
+    name: "Irrigation Rain Sensor"
+    id: irrigation_rain_sensor
+    device_class: moisture
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 0
+      inverted: true
+
+  - platform: gpio
+    name: "I2"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 1
+      inverted: true
+
+  - platform: gpio
+    name: "I3"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 2
+      inverted: true
+
+  - platform: gpio
+    name: "I4"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 3
+      inverted: true
+
+  - platform: gpio
+    name: "I5"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 4
+      inverted: true
+
+  - platform: gpio
+    name: "I6"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 5
+      inverted: true
+
+  - platform: gpio
+    name: "I7"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 6
+      inverted: true
+
+  - platform: gpio
+    name: "I8"
+    pin:
+      sn74hc165: sn74hc165_hub
+      number: 7
+      inverted: true
+
+  - platform: gpio
+    id: key_1
+    pin:
+      number: GPIO18
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - delayed_off: 10ms
+
+  - platform: gpio
+    id: key_2
+    pin:
+      number: GPIO19
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - delayed_off: 10ms
+
+  - platform: gpio
+    id: key_3
+    pin:
+      number: GPIO21
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - delayed_off: 10ms
+
+  - platform: gpio
+    id: key_4
+    pin:
+      number: GPIO23
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - delayed_off: 10ms
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_device
+    name: "I9"
+    register_type: discrete_input
+    address: 0
+
+sensor:
+  - platform: homeassistant
+    id: rain_today
+    entity_id: sensor.rain_today

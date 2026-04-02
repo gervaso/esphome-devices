@@ -1,0 +1,27 @@
+external_components:
+  - source:
+      type: git
+      url: https://github.com/gervaso/esphome-devices
+      ref: main
+      path: irrigation/external_components
+    components: [seven_segment_display]
+
+display:
+  - platform: seven_segment_display
+    id: onboard_display
+    digit1: digit1
+    digit2: digit2
+    digit3: digit3
+    digit4: digit4
+    segment_a: segment_a
+    segment_b: segment_b
+    segment_c: segment_c
+    segment_d: segment_d
+    segment_e: segment_e
+    segment_f: segment_f
+    segment_g: segment_g
+    dp: dp
+    update_interval: 250ms
+    inverted: false
+    lambda: |-
+      it.print(id(text_var).c_str());

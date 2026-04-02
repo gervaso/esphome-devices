@@ -1,0 +1,161 @@
+api:
+  actions:
+    - action: start_full_cycle
+      then:
+        - sprinkler.start_full_cycle: controller
+
+    - action: start_single_valve
+      variables:
+        valve: int
+        run_duration: int
+      then:
+        - sprinkler.start_single_valve:
+            id: controller
+            valve_number: !lambda 'return valve;'
+            run_duration: !lambda 'return run_duration * 60;'
+
+    - action: next_valve
+      then:
+        - sprinkler.next_valve: controller
+
+    - action: previous_valve
+      then:
+        - sprinkler.previous_valve: controller
+
+    - action: shutdown
+      then:
+        - sprinkler.shutdown: controller
+
+sprinkler:
+  - id: controller
+    main_switch:
+      name: "Sprinklers"
+      id: controller_main_switch
+      icon: "mdi:sprinkler-variant"
+    auto_advance_switch:
+      name: "Sprinklers Auto Advance"
+      id: controller_auto_advance
+      icon: "mdi:transfer-right"
+    queue_enable_switch:
+      name: "Enable queue"
+      id: controller_enable_queue
+      icon: "mdi:queue-first-in-last-out"
+    reverse_switch:
+      name: "Sprinklers Reverse"
+      id: controller_reverse
+      icon: "mdi:arrow-u-down-left"
+    repeat_number:
+      id: controller_main_repeat
+      name: "Sprinklers Repeat"
+      icon: "mdi:repeat"
+    multiplier_number:
+      id: controller_main_multiplier
+      name: "Sprinklers Multiplier"
+      icon: "mdi:multiplication"
+    pump_start_pump_delay: 5s
+    pump_stop_valve_delay: 5s
+    valve_overlap: 5s
+    valves:
+      - valve_switch: "Zone 1"
+        valve_switch_id: sprinkler_valve_sw0
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 1"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_1_run_duration
+          name: "Zone 1 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 2"
+        valve_switch_id: sprinkler_valve_sw1
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 2"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_2_run_duration
+          name: "Zone 2 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 3"
+        valve_switch_id: sprinkler_valve_sw2
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 3"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_3_run_duration
+          name: "Zone 3 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 4"
+        valve_switch_id: sprinkler_valve_sw3
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 4"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_4_run_duration
+          name: "Zone 4 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 5"
+        valve_switch_id: sprinkler_valve_sw4
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 5"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_5_run_duration
+          name: "Zone 5 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 6"
+        valve_switch_id: sprinkler_valve_sw5
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 6"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_6_run_duration
+          name: "Zone 6 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 7"
+        valve_switch_id: sprinkler_valve_sw6
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 7"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_7_run_duration
+          name: "Zone 7 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
+
+      - valve_switch: "Zone 8"
+        valve_switch_id: sprinkler_valve_sw7
+        pump_switch_id: sprinkler_master_valve
+        enable_switch:
+          name: "Enable Zone 8"
+          icon: "mdi:auto-mode"
+        run_duration_number:
+          id: controller_zone_8_run_duration
+          name: "Zone 8 Run Duration"
+          icon: "mdi:timer"
+          initial_value: 5
+          unit_of_measurement: min
